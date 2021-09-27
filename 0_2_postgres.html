@@ -334,6 +334,33 @@
     Setup
   </a>
   
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#postgresql-installation" class="md-nav__link">
+    PostgreSQL installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgadmin" class="md-nav__link">
+    pgAdmin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-database-creation" class="md-nav__link">
+    Setup - database creation
+  </a>
+  
 </li>
       
         <li class="md-nav__item">
@@ -814,6 +841,33 @@
     Setup
   </a>
   
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#postgresql-installation" class="md-nav__link">
+    PostgreSQL installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgadmin" class="md-nav__link">
+    pgAdmin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-database-creation" class="md-nav__link">
+    Setup - database creation
+  </a>
+  
 </li>
       
         <li class="md-nav__item">
@@ -868,18 +922,24 @@ popular DBMS PostgreSQL.</p>
 <a href="https://lms.isae.fr/pluginfile.php/72351/mod_resource/content/1/labSQLFSD312.pdf">TP</a>
 by Christophe Garion, CC BY-NC-SA 2015.</p>
 <h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">🔗</a></h2>
+<p>Before class, please install PostgreSQL and pgAdmin.</p>
+<h3 id="postgresql-installation">PostgreSQL installation<a class="headerlink" href="#postgresql-installation" title="Permanent link">🔗</a></h3>
 <p>For this session, students should install <a href="https://www.postgresql.org/download/">PostgreSQL</a> (v9 or higher) and <a href="https://www.pgadmin.org/">pgAdmin</a> (v4). Follow the installation instructions and make sure you have an initial database setup and the <code>postgresql</code> service running.</p>
 <ul>
-<li><a href="https://wiki.archlinux.org/index.php/PostgreSQL">Installation on Arch Linux</a></li>
 <li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart">Installation on Ubuntu</a></li>
-<li><a href="https://www.postgresqltutorial.com/install-postgresql/">Installation on Windows</a> (and add the PostgreSQL binaries to your <a href="https://www.pcastuces.com/pratique/astuces/5334.htm">path</a>)</li>
 <li><a href="https://postgresapp.com/">Installation on Mac OS</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/PostgreSQL">Installation on Arch Linux</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-database">Installation on Windows Subsystem for Linux</a></li>
+<li><a href="https://www.postgresqltutorial.com/install-postgresql/">Installation on Windows</a> (and add the PostgreSQL binaries to your <a href="https://www.pcastuces.com/pratique/astuces/5334.htm">path</a>)</li>
 </ul>
 <p>Additionally, add your login user as a postgresql superuser to enable database creation with your user:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># bash shell in Linux or OSX</span>
 $ sudo su -l postgres
 <span class="o">[</span>postgres<span class="o">]</span>$ createuser --interactive
 </code></pre></div>
+<h3 id="pgadmin">pgAdmin<a class="headerlink" href="#pgadmin" title="Permanent link">🔗</a></h3>
+<p>You can do all exercises directly through the <code>psql</code> shell for this class. However, it is useful to have a graphical confirmation of the database configuration. pgAdmin is one of many front-ends for Postgres. Install it by following the instructions on the <a href="https://www.pgadmin.org/">pgAdmin</a> site.</p>
+<h2 id="setup-database-creation">Setup - database creation<a class="headerlink" href="#setup-database-creation" title="Permanent link">🔗</a></h2>
 <p>Once you've installated and configured PostgreSQL, create the first exercise database:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># bash shell in Linux or OSX or windows powershell</span>
 $ createdb db-mexico86
