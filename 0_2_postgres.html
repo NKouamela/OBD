@@ -946,7 +946,7 @@ $ createdb db-mexico86
 </code></pre></div>
 <p>you can also do this through an SQL shell:</p>
 <div class="highlight"><pre><span></span><code><span class="o">#</span> <span class="k">SQL</span> <span class="n">shell</span>
-<span class="n">postgres</span><span class="o">=#</span> <span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="ss">&quot;test-beer&quot;</span><span class="p">;</span>
+<span class="n">postgres</span><span class="o">=#</span> <span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="ss">&quot;db-mexico86&quot;</span><span class="p">;</span>
 </code></pre></div>
 <p>Confirm with pgAdmin that your database <code>db-mexico86</code> was created. If you don't
 have any servers, create one by right-clicking. The host address is <code>127.0.0.1</code>
@@ -962,7 +962,11 @@ is, you can reset the password of the postgres user:</p>
 
 <h2 id="mexico86-database-simple-queries">Mexico86 database - simple queries<a class="headerlink" href="#mexico86-database-simple-queries" title="Permanent link">🔗</a></h2>
 <p>This database contains data from the 1986 football World Cup. </p>
-<p>Download the creation and insertion <a href="https://github.com/SupaeroDataScience/OBD/tree/master/scripts">scripts</a> and run the scripts in the <code>mexico</code> folder.</p>
+<p>You can download the database creation script individually:
+<div class="highlight"><pre><span></span><code>$ wget https://raw.githubusercontent.com/SupaeroDataScience/OBD/master/scripts/mexico86/create-tables-std.sql
+</code></pre></div></p>
+<p>Or git clone the class repository and navigate to the creation and insertion <a href="https://github.com/SupaeroDataScience/OBD/tree/master/scripts">scripts</a>.</p>
+<p>Once you have the scripts, run the database creation script in the <code>mexico</code> folder.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># bash shell in Linux or OSX, or windows powershell</span>
 $ psql -d db-mexico86 -f mexico86/create-tables-std.sql
 </code></pre></div>
