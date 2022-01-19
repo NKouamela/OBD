@@ -1065,15 +1065,25 @@
 </ul>
 <h3 id="creating-my-vm-using-the-console">Creating my VM using the console<a class="headerlink" href="#creating-my-vm-using-the-console" title="Permanent link">🔗</a></h3>
 <ul>
-<li>Follow <a href="https://codelabs.developers.google.com/codelabs/cloud-create-a-vm">this codelab</a> to create your VM</li>
-<li>Create the following instance</li>
-<li>type: n1-standard-2</li>
-<li>zone: europe-west4-a (the netherlands)</li>
+<li>
+<p>Create your VM from the google cloud interface : Go to this link https://cloud.google.com/compute/docs/instances/create-start-instance#startinstanceconsole and follow the "CONSOLE" instruction</p>
+</li>
+<li>
+<p>Create an instance with the following parameters</p>
+</li>
+<li>type: n1-standard-1</li>
+<li>zone: europe-west4-a/b/c/d (the netherlands) or europe-west1-(b,c,d) Belgium</li>
 <li>os: ubuntu 20.04</li>
 <li>boot disk size: 10 Gb</li>
-<li>Name it however you see fit</li>
+<li>Give it a name of your choice (that you can remember)</li>
 <li><strong>DO NOT SHUT IT DOWN</strong> for now</li>
 </ul>
+<p>Note : If you were using the command line :</p>
+<div class="highlight"><pre><span></span><code>gcloud compute instances create <span class="o">{</span>name<span class="o">}</span> --project<span class="o">={</span>your-project<span class="o">}</span> --zone<span class="o">={</span>your-zone<span class="o">}</span> <span class="se">\</span>
+  --machine-type<span class="o">=</span>n1-standard-1 <span class="se">\</span>
+  --image<span class="o">=</span>ubuntu-2004-focal-v20220110 <span class="se">\</span>
+  --image-project<span class="o">=</span>ubuntu-os-cloud
+</code></pre></div>
 <h3 id="connecting-to-ssh">Connecting to SSH<a class="headerlink" href="#connecting-to-ssh" title="Permanent link">🔗</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -1128,15 +1138,16 @@
 <ul>
 <li>Shutdown the VM (from the web browser), check the previous codelab to see how to do it</li>
 <li>Select it and click on EDIT</li>
-<li>Change the machine type to <code>n1-standard-4</code> (<a href="https://cloud.google.com/compute/docs/instances/changing-machine-type-of-stopped-instance">link to documentation</a>)</li>
+<li>Change the machine type to <code>n1-standard-2</code> (<a href="https://cloud.google.com/compute/docs/instances/changing-machine-type-of-stopped-instance">link to documentation</a>)</li>
 <li>Relaunch it, reconnect to it and try to list the CPUs &amp; RAM amount again</li>
 </ul>
 <p>Magic isn't it ? </p>
 <p>Note: If you had any files and specific configuration, they would still be here !</p>
 <h3 id="transfering-files-from-the-computer-to-this-machine">Transfering files from the computer to this machine<a class="headerlink" href="#transfering-files-from-the-computer-to-this-machine" title="Permanent link">🔗</a></h3>
 <ul>
+<li>We will use the terminal to transfer some files <strong><em>from</em>* your computer </strong>to** this machine,</li>
 <li>
-<p>We will use the terminal to transfer some files <strong><em>from</em>* your computer </strong>to** this machine,</p>
+<p>If you use cloud shell you can do it as well : create a dummy file in cloud shell</p>
 </li>
 <li>
 <p toc="toc">Follow <a href="https://cloud.google.com/compute/docs/instances/transfer-files#transfergcloud">this link</a> to learn how to use the gcloud cli tool to transfer files to your instance
@@ -1204,6 +1215,7 @@
 <p>You can delete the VM as well, we will not use it</p>
 </li>
 </ul>
+<p><strong>DELETE THE INSTANCE NOW</strong></p>
 <h2 id="3-google-compute-engine-from-the-cli-and-deep-learning-vms">3. Google Compute Engine from the CLI and "deep learning VMs"<a class="headerlink" href="#3-google-compute-engine-from-the-cli-and-deep-learning-vms" title="Permanent link">🔗</a></h2>
 <p>Here we will use the google cloud sdk to create a more complex VM with a pre-installed image and connect to its jupyter server</p>
 <p>This will be useful for the next part of our workshop because both git and docker are already installed !</p>
@@ -1229,7 +1241,6 @@ gcloud compute instances create <span class="nv">$INSTANCE_NAME</span> <span cla
 <li>Notice the similarities between the first VM you created and this one,</li>
 <li>What changed ?</li>
 <li>If you want to learn more about compute images, image families etc... <a href="https://cloud.google.com/ai-platform/deep-learning-vm/docs/concepts-images">go here</a></li>
-<li>Metadata command is a bit of magic provided by google to automatically install GPU drivers (very useful !)</li>
 </ul>
 <h3 id="connect-to-ssh-to-this-machine">Connect to ssh to this machine<a class="headerlink" href="#connect-to-ssh-to-this-machine" title="Permanent link">🔗</a></h3>
 <ul>
@@ -1287,6 +1298,7 @@ gcloud compute instances create <span class="nv">$INSTANCE_NAME</span> <span cla
 <li>Your process should still be here !</li>
 </ul>
 <p>Congratulations :)</p>
+<p><strong>DELETE ALL THE INSTANCES YOU CREATED NOW</strong></p>
 
               
             </article>
