@@ -1772,7 +1772,7 @@ publishing ports by means of the <code>-p</code> flag when using <code>$ docker 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">app</span><span class="p">()</span>
 </code></pre></div>
-<p>With your terminal you would call it using <code>python app.py hello {my name}</code> or <code>python app.py run-config {my config}</code></p>
+<p>With your terminal you would call it using <code>python app.py hello {my name}</code> or <code>python app.py run-config --config-file {my config}</code></p>
 <ul>
 <li>Modify the dockerfile : </li>
 <li>Replace <code>CMD ["python3", "/usr/src/app/app.py"]</code></li>
@@ -1792,7 +1792,7 @@ publishing ports by means of the <code>-p</code> flag when using <code>$ docker 
   -v /home/${USER}/configs:/home/configs \
   --workdir /home/ \
   {your image} \
-  run-config {path to your config in DOCKER, eg /home/configs/config.txt}
+  run-config --config-file {path to your config in DOCKER, eg /home/configs/config.txt}
 </code></pre></div>
 <p>Note that since you mounted volumes, you must pass the <strong>path in the docker</strong> to your config file for it to work</p>
 <h2 id="4-containers-registry">4. Containers Registry<a class="headerlink" href="#4-containers-registry" title="Permanent link">🔗</a></h2>
