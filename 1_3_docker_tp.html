@@ -1274,12 +1274,13 @@
 <h1 id="docker-hands-on">Docker: Hands on<a class="headerlink" href="#docker-hands-on" title="Permanent link">🔗</a></h1>
 <h2 id="how-to-run-this">How to run this ?<a class="headerlink" href="#how-to-run-this" title="Permanent link">🔗</a></h2>
 <p>We will discover the basics of docker and you will be able to manipulate your first images and containers !</p>
-<p>First, you should be inside jupyter lab using the google cloud deep learning VM created previously</p>
-<p>It's possible to do this from google cloud shell using code-server as well but you will be limited in disk space later on</p>
+<p>Two solutions to do that : </p>
+<p>1) You are inside sing the google cloud deep learning VM created previously</p>
+<p>2) <strong>It's also possible to do this from google cloud shell (<a href="shell.cloud.google.com">shell.cloud.google.com</a>)</strong> as well but you will be limited in disk space later on : Skip 5. if that is the case.</p>
 <p>Why only two of these ? That's because both have git and docker installed and installing docker is a pain.</p>
 <p>If you are running linux on your laptop you may <a href="https://docs.docker.com/engine/install/">install docker</a> and do everything from your computer</p>
 <p>Otherwise... don't ;)</p>
-<p><strong>FIRST</strong> if you are using the deep learning vm</p>
+<p>If you are using the deep learning vm</p>
 <p>Disconnect from your instance and relaunch it while mapping 8888 as well. You should have the vm jupyter's lab on 8080, and 8888 free</p>
 <details><summary>Solution</summary>
 
@@ -1625,7 +1626,7 @@ CMD [&quot;python3&quot;, &quot;/usr/src/app/app.py&quot;]
 <h3 id="233-build-the-image">2.3.3 Build the image<a class="headerlink" href="#233-build-the-image" title="Permanent link">🔗</a></h3>
 <p>Now that you have your <code>Dockerfile</code>, you can build your image. The <code>docker build</code> command does the heavy-lifting of creating a docker image from a <code>Dockerfile</code>.</p>
 <p>The <code>docker build</code> command is quite simple - it takes an optional tag name with the <code>-t</code> flag, and the location of the directory containing the <code>Dockerfile</code> - the <code>.</code> indicates the current directory:</p>
-<p><code>docker build -t myfirstapp:1.0</code></p>
+<p><code>docker build -t myfirstapp:1.0 .</code></p>
 <div class="highlight"><pre><span></span><code>$ docker build -t myfirstapp:1.0 .
 Sending build context to Docker daemon 9.728 kB
 Step 1 : FROM alpine:latest
@@ -1830,12 +1831,7 @@ publishing ports by means of the <code>-p</code> flag when using <code>$ docker 
 <p>Take a look at the documentation and <a href="https://github.com/Kaggle/docker-python">the repository</a></p>
 <h3 id="53-get-the-algorithm-in-ml-git-in-your-virtual-machine">5.3 Get the algorithm in ML git in your Virtual Machine<a class="headerlink" href="#53-get-the-algorithm-in-ml-git-in-your-virtual-machine" title="Permanent link">🔗</a></h3>
 <ul>
-<li>
-<p>From your vm, run <code>git clone https://github.com/erachelson/MLclass.git</code>, this should setup your AML class inside your VM</p>
-</li>
-<li>
-<p>Using code-server is not mandatory now</p>
-</li>
+<li>From your vm, run <code>git clone https://github.com/erachelson/MLclass.git</code>, this should setup your AML class inside your VM</li>
 </ul>
 <h3 id="54-mounting-volumes-and-ports">5.4 Mounting volumes and ports<a class="headerlink" href="#54-mounting-volumes-and-ports" title="Permanent link">🔗</a></h3>
 <p>Now let's run the image. This container has a jupyter notebook accessible from port 8080 so we will need to map the host port 8888 (the one accessible from the ssh tunnel) to the docker port 8080, we will use <a href="https://docs.docker.com/config/containers/container-networking/">port forwarding</a></p>
