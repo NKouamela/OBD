@@ -745,13 +745,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tester-son-application-localement" class="md-nav__link">
-    Tester son application localement
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#construire-le-docker_1" class="md-nav__link">
     Construire le docker
   </a>
@@ -1130,13 +1123,6 @@
           <li class="md-nav__item">
   <a href="#corection-apppy" class="md-nav__link">
     Corection app.py
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tester-son-application-localement" class="md-nav__link">
-    Tester son application localement
   </a>
   
 </li>
@@ -1601,43 +1587,43 @@
 <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">inputs</span><span class="p">:</span> <span class="n">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
     <span class="k">global</span> <span class="n">MODELS</span>
 
-<span class="c1"># get correct model</span>
-<span class="n">model_name</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">model</span>
+    <span class="c1"># get correct model</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">model</span>
 
-<span class="k">if</span> <span class="n">model_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MODEL_NAMES</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;wrong model name, choose between </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">MODEL_NAMES</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">model_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MODEL_NAMES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;wrong model name, choose between </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">MODEL_NAMES</span><span class="p">))</span>
 
-<span class="c1"># check load</span>
-<span class="k">if</span> <span class="n">MODELS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">MODELS</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="c1"># check load</span>
+    <span class="k">if</span> <span class="n">MODELS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">MODELS</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">MODELS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">MODELS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
 
-<span class="c1"># Get Image</span>
-<span class="c1"># Decode image</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;File is not an image&quot;</span><span class="p">)</span>
-<span class="c1"># Convert from RGBA to RGB *to avoid alpha channels*</span>
-<span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;RGBA&quot;</span><span class="p">:</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+    <span class="c1"># Get Image</span>
+    <span class="c1"># Decode image</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;File is not an image&quot;</span><span class="p">)</span>
+    <span class="c1"># Convert from RGBA to RGB *to avoid alpha channels*</span>
+    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;RGBA&quot;</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
 
-<span class="c1"># Inference</span>
-<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">640</span><span class="p">)</span>  <span class="c1"># includes NMS</span>
-<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">classes</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">names</span>
+    <span class="c1"># Inference</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">640</span><span class="p">)</span>  <span class="c1"># includes NMS</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">classes</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">names</span>
 
-<span class="c1"># Post processing</span>
-<span class="n">predictions</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">xyxy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">detections</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_prediction</span><span class="p">(</span><span class="n">prediction</span><span class="o">=</span><span class="n">pred</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">]</span>
+    <span class="c1"># Post processing</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">xyxy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">detections</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_prediction</span><span class="p">(</span><span class="n">prediction</span><span class="o">=</span><span class="n">pred</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">]</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">Result</span><span class="p">(</span><span class="n">detections</span><span class="o">=</span><span class="n">detections</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">model</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">Result</span><span class="p">(</span><span class="n">detections</span><span class="o">=</span><span class="n">detections</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">model</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
 
-<span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
 </details>
 <h3 id="construire-le-docker">Construire le docker<a class="headerlink" href="#construire-le-docker" title="Permanent link">🔗</a></h3>
@@ -2165,14 +2151,6 @@ docker push eu.gcr.io/<span class="si">${</span><span class="nv">PROJECT_ID</spa
 </details>
 <p>!!! note:
     Le test mode servait pour un ancien BE. Si vous avez tout fait dans l'ordre vous ne devriez pas en avoir besoin</p>
-<h3 id="tester-son-application-localement">Tester son application localement<a class="headerlink" href="#tester-son-application-localement" title="Permanent link">🔗</a></h3>
-<ul>
-<li>installer les dépendances (<code>pip install -r requirements.txt</code>)</li>
-<li><code>streamlit run app.py</code>, qui créée l'application interactive sur le port 8501 de la machine (ip:8501)</li>
-<li>Si vous mettez l'application à jour, le serveur de développement se relance automatiquement</li>
-</ul>
-<p>Si vous avez terminé le docker 1 vous devriez pouvoir faire des prédictions,</p>
-<p>Sinon le "dummy request" devrait fonctionner</p>
 <h3 id="construire-le-docker_1">Construire le docker<a class="headerlink" href="#construire-le-docker_1" title="Permanent link">🔗</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nv">PROJECT_ID</span><span class="o">=</span><span class="k">$(</span>gcloud config get-value project <span class="m">2</span>&gt; /dev/null<span class="k">)</span>
 docker build -t eu.gcr.io/<span class="si">${</span><span class="nv">PROJECT_ID</span><span class="si">}</span>/<span class="o">{</span>your app name<span class="o">}</span>:<span class="o">{</span>your version<span class="o">}</span> -f Dockerfile .
@@ -2183,6 +2161,7 @@ docker build -t eu.gcr.io/<span class="si">${</span><span class="nv">PROJECT_ID<
 docker run --rm -p <span class="m">8501</span>:8501 eu.gcr.io/<span class="si">${</span><span class="nv">PROJECT_ID</span><span class="si">}</span>/<span class="o">{</span>your app name<span class="o">}</span>:<span class="o">{</span>your version<span class="o">}</span>
 </code></pre></div>
 <p>Vous pouvez vous rendre sur l'ip de la machine sur le port 8501</p>
+<p>Indiquez l'ip de la machine port 8000 à gauche</p>
 <h3 id="pousser-le-docker-sur-google-container-registry">Pousser le docker sur google container registry<a class="headerlink" href="#pousser-le-docker-sur-google-container-registry" title="Permanent link">🔗</a></h3>
 <div class="highlight"><pre><span></span><code>gcloud auth configure-docker
 docker push eu.gcr.io/<span class="si">${</span><span class="nv">PROJECT_ID</span><span class="si">}</span>/<span class="o">{</span>your app name<span class="o">}</span>:<span class="o">{</span>your version<span class="o">}</span>
